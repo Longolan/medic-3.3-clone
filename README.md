@@ -148,8 +148,6 @@ To run without watch:
 yarn start
 ```
 
-which will start the webapp, api, and sentinel, and watch for changes in each app.
-
 ### Deploy apps individually
 
 If `yarn start` is not to your taste for whatever reason, the apps can be deployed individually.
