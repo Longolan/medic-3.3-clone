@@ -108,6 +108,8 @@ Create a `.env` file in the app directory with the following contents
 ```shell
 COUCH_URL=http://admin:pass@localhost:5984/medic
 COUCH_NODE_NAME=couchdb@localhost
+COUCH_USER=username
+COUCH_PASSWORD=password-for-couch
 ```
 
 Then install webapp, admin, api and sentinel dependencies
@@ -119,13 +121,28 @@ cd api && yarn install && cd ..
 cd sentinel && yarn install && cd ..
 ```
 
+Then install webapp, admin, api and sentinel dependencies
+
+```shell
+export COUCH_NODE_NAME=couchdb@localhost
+export COUCH_URL=http://admin:pass@localhost:5984/medic
+export COUCH_USER=username
+export COUCH_PASSWORD=password-for-couch
+```
+
 Then do an initial deploy of the webapp:
 
 ```shell
 grunt dev-webapp
 ```
 
-Once this is complete you can close it, and from now on you can just run:
+Once this is complete you can close it, and from now on you can just run to run in watch mode:
+
+```shell
+yarn dev
+```
+
+To run without watch:
 
 ```shell
 yarn start

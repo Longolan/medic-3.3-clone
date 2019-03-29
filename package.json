@@ -12,8 +12,9 @@
     "yarn": ">=1.7.0"
   },
   "scripts": {
-    "start": "nf start",
-    "webdriver": "webdriver-manager update && webdriver-manager start"
+    "start": "./node_modules/.bin/concurrently \"node api/server.js\" \"node sentinel/server.js\"",
+    "webdriver": "webdriver-manager update && webdriver-manager start",
+    "dev": "nf start"
   },
   "devDependencies": {
     "angular-mocks": "^1.7.3",
