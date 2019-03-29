@@ -121,13 +121,13 @@ cd api && yarn install && cd ..
 cd sentinel && yarn install && cd ..
 ```
 
-Then install webapp, admin, api and sentinel dependencies
+Then export the contents of `.env` to the shell environment
 
 ```shell
 export COUCH_NODE_NAME=couchdb@localhost
 export COUCH_URL=http://admin:pass@localhost:5984/medic
-export COUCH_USER=username
-export COUCH_PASSWORD=password-for-couch
+export COUCH_USER=admin
+export COUCH_PASSWORD=pass
 ```
 
 Then do an initial deploy of the webapp:
