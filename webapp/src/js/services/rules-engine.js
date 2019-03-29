@@ -107,7 +107,6 @@ var nools = require('nools'),
         KNOWN_TYPES.forEach(function(type) {
           session.on(type, function(fact) {
             if (type === 'task') {
-              console.log({ _id: `${fact._id}__${new Date(fact.date).getTime()}` }, fact.actions[0].content.source_id);
               console.log(fact)
             }
             notifyCallbacks(fact, type);
