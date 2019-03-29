@@ -1,0 +1,117 @@
+@option-color: #ADAEA7;
+@option-selected-color: #FBE1A9;
+@medic-slate-color: #323232;
+@medic-overlay-color: #191919;
+@highlight-color: #E9EAE3;
+@seperator-color: #E0E0E0;
+@background-color: #F2F2F3;
+@form-background-color: #FFFFFF;
+@label-color: #777777;
+@error-color: #DA4548;
+@ok-color: #A0BA62;
+@birth-color: #49A349;
+@high-risk-color: #E33030;
+@warning-color: #D19D2E;
+@primary-color: #C78330;
+@unread-color: #007DC6;
+@button-text-color: #333333;
+@button-text-inverse-color: #DDDDDD;
+@inactive-color: #A5A8AA;
+
+/* tab colours */
+@messages-color: #63A2C6;
+@tasks-color: #7193EE;
+@reports-color: #E9AA22;
+@analytics-color: #76B0B0;
+@contacts-color: #F47B63;
+@admin-color: #999999;
+@help-color: #8D73AE;
+
+/* state colours */
+@scheduled-state-color: #76B0B0;
+@pending-state-color: #E9AA22;
+@sent-state-color: #84AA69;
+@muted-state-color: #A0A0A0;
+@failed-state-color: #DA4548;
+@received-state-color: #E9AA22;
+
+/* Visit count progress colors */
+@visits-goal-incomplete: #C38813;
+@visits-goal-done: #538E8D;
+
+/* icons characters */
+@high-risk-icon: '\f071';
+@upcoming-edd-icon: '\f111';
+
+/* kujua-reporting colours */
+@red: #CA410B;
+@green: #8EB51C;
+@grey: #797979;
+@lightgrey: #CBCBCB;
+@gold: #CC8F00;
+@aqua: #1A8FB2;
+@lightaqua: #EFF9FA;
+@nearwhite: #F2F2F2;
+@linkColor: @aqua;
+@popcorn: #FFFFAA;
+
+/* Removed from bootstrap: stubs added for backwards compatibility */
+@white: #FFFFFF;
+@grayDark: #333333;
+
+@radius-size: 10px;
+@radius-size-small: 4px;
+@content-width: 1170px;
+
+/* font sizes */
+@font-extra-extra-large: 1.5rem;
+@font-extra-large: 1.25rem;
+@font-large: 1.125rem;
+@font-medium: 1rem;
+@font-small: 0.875rem;
+
+@icon-small: 30px;
+@icon-large: 60px;
+
+.button-text() {
+  color: @button-text-color;
+  text-shadow: rgba(255, 255, 255, 0.5) 1px 1px 2px;
+  svg path {
+    fill: @button-text-color;
+  }
+}
+
+.button-text-hover() {
+  color: @white;
+  svg path {
+    fill: @white;
+  }
+}
+
+.button-text-disabled() {
+  color: @label-color;
+  svg path {
+    fill: @label-color;
+  }
+}
+
+.button-text-inverse() {
+  color: @button-text-inverse-color;
+  text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
+  svg path {
+    fill: @button-text-inverse-color;
+  }
+}
+
+/* state icons */
+@scheduled-state-icon: '\f073';
+@muted-state-icon: '\f1f6';
+@cleared-state-icon: '\f00d';
+@pending-state-icon: '\f017';
+@forwarded-to-gateway-state-icon: '\f064';
+@received-by-gateway-state-icon: '\f381';
+@forwarded-by-gateway-state-icon: '\f382';
+@sent-state-icon: '\f0e0';
+@delivered-state-icon: '\f058';
+@denied-state-icon: '\f056';
+@failed-state-icon: '\f071';

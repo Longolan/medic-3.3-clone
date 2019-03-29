@@ -1,0 +1,17 @@
+<div class="content-pane right-pane">
+  <div class="col-sm-8 item-content empty-selection" ng-show="loadingForm">
+    <div>
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <div class="col-sm-8 item-content empty-selection" ng-show="!loadingForm && contentError">
+    <div translate>{{ errorTranslationKey }}</div>
+  </div>
+
+  <div class="col-sm-8 item-content material" ng-show="selected && form && !loadingForm">
+    <div class="card">
+      <mm-enketo id="'contact-report'" status="enketoStatus" on-submit="save()" on-cancel="navigationCancel()" />
+    </div>
+  </div>
+</div>
