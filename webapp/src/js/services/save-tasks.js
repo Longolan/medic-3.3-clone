@@ -6,11 +6,9 @@
   var inboxServices = angular.module('inboxServices');
 
   inboxServices.factory('SaveTasks',
-    function (
-      DB,
-      Session,
-      $log,
-    ) {
+    function ( DB, Session, $log ) {
+      'use strict';
+      'ngInject';
 
     }
   );
