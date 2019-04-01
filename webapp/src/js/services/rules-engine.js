@@ -20,7 +20,8 @@ var nools = require('nools'),
       Search,
       Session,
       Settings,
-      UserContact
+      UserContact,
+      SaveTask
     ) {
 
       'ngInject';
@@ -107,7 +108,7 @@ var nools = require('nools'),
         KNOWN_TYPES.forEach(function(type) {
           session.on(type, function(fact) {
             if (type === 'task') {
-              console.log(fact)
+              SaveTask(fact);
             }
             notifyCallbacks(fact, type);
           });

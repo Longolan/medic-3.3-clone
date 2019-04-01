@@ -1,6 +1,6 @@
-var TASK_PARENT_KEYS = ['actions', '_id', 'date'];
+var TASK_PARENT_KEYS = ['actions', '_id', 'date', 'contact'];
 var TASK_ACTION_KEYS = ['form', 'type', 'content'];
-var TASK_ACTION_CONTENT_KEYS = ['source', 'source_id'];
+var TASK_ACTION_CONTENT_KEYS = ['source', 'source_id', 'contact'];
 
 (function () {
 
@@ -8,12 +8,13 @@ var TASK_ACTION_CONTENT_KEYS = ['source', 'source_id'];
 
   var inboxServices = angular.module('inboxServices');
 
-  inboxServices.factory('SaveTasks',
-    function ( DB, Session, $log ) {
+  inboxServices.factory('SaveTask',
+    function ( DB, Session, $q, $log ) {
       'use strict';
       'ngInject';
 
       function isTaskInvalid(task) {
+        console.dir(task);
         var isInvalid = false;
 
         var parentKeys = Object.keys(task);
@@ -52,18 +53,45 @@ var TASK_ACTION_CONTENT_KEYS = ['source', 'source_id'];
         return isInvalid;
       }
 
-      var saveTask = function (task) {
-        if (isTaskInvalid(task)) {
-          return;
-        }
+      function saveTask(task) {
+        return task.actions.map(function (val) {
+          var cache = { type: 'gen-task' };
+
+          cache['form'] = val.form;
+          cache['form_type'] = val.type;
+          cache['task'] = {
+            source: val.content.source,
+            source_id: val.content.source_id || 'N/A',
+            task_form_label: val.label,
+            contact: { name: val.content.contact.name, _id: val.content.contact._id, type: val.content.contact.type },
+            priority: task.priority,
+            isResolved: task.resolved,
+            timestamp: task.date,
+          };
+          cache['generated_for'] = Session.userCtx().name;
+          cache['_id'] = `${task._id}__${new Date(task.date).getTime()}__${val.form}__${cache['task'].source_id}__${Session.userCtx().name}`;
+
+          return cache;
+        }).
+        reduce(function ($p, task) {
+
+          return $p.then(function () {
+            return DB().get(task._id).
+              catch(function (err) {
+                if (err.name === 'not_found') {
+                  return DB().put(task);
+                }
+
+                $log.error(JSON.stringify(err));
+                return $q.resolve();
+              });
+          });
+
+        }, $q.resolve());
+
       }
 
-      var queryTask = function (searchTerm) { }
-
-      return {
-        save: saveTask,
-        query: queryTask,
-      };
+      return saveTask;
     }
   );
 
