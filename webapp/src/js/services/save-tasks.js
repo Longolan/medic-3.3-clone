@@ -55,7 +55,7 @@ var TASK_ACTION_CONTENT_KEYS = ['source', 'source_id', 'contact'];
 
       function saveTask(task) {
         return task.actions.map(function (val) {
-          var cache = { type: 'gen-task' };
+          var cache = { type: 'task:generated' };
 
           cache['form'] = val.form;
           cache['form_type'] = val.type;
@@ -68,7 +68,9 @@ var TASK_ACTION_CONTENT_KEYS = ['source', 'source_id', 'contact'];
             isResolved: task.resolved,
             timestamp: task.date,
           };
-          cache['generated_for'] = Session.userCtx().name;
+          cache['created_by_doc'] = Session.userCtx().name;
+          cache['patient_id'] = val.content.contact._id
+          cache['contact'] = task.contact
           cache['_id'] = `${task._id}__${new Date(task.date).getTime()}__${val.form}__${cache['task'].source_id}__${Session.userCtx().name}`;
 
           return cache;

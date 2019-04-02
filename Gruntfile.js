@@ -71,8 +71,8 @@ module.exports = function(grunt) {
     'couch-push': {
       localhost: {
         options: {
-          user: 'admin',
-          pass: 'admin1234',
+          user: process.env.COUCH_USER,
+          pass: process.env.COUCH_PASSWORD,
         },
         files: {
           [process.env.COUCH_URL]: 'build/ddocs/medic.json',
