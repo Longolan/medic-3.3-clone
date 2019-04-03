@@ -69,8 +69,8 @@ var TASK_ACTION_CONTENT_KEYS = ['source', 'source_id', 'contact'];
             timestamp: task.date,
           };
           cache['created_by_doc'] = Session.userCtx().name;
-          cache['patient_id'] = val.content.contact._id
-          cache['contact'] = task.contact
+          // cache['patient_id'] = val.content.contact._id;
+          // cache['contact'] = task.contact;
           cache['_id'] = `${task._id}__${new Date(task.date).getTime()}__${val.form}__${cache['task'].source_id}__${Session.userCtx().name}`;
 
           return cache;
