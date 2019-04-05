@@ -3,8 +3,7 @@ version: '3.3'
 services:
 
   nginx:
-    container_name: web_server
-    hostname: webserver
+    container_name: nginx
     image: nginx:alpine
     ports:
       - "7007:80"
@@ -23,7 +22,7 @@ services:
     container_name: medic
     hostname: medic
     ports:
-      - "127.0.0.1:5988:5988"
+      - "5988:5988"
     networks:
       - medic-net
     volumes:
@@ -32,21 +31,19 @@ services:
       - ./sentinel/logs:/srv/sentinel/logs/
     depends_on:
       - couchdb
-      - nginx
     env_file:
       - ./.env
       - ./.couch
 
   couchdb:
       container_name: couchdb
-      hostname: couch
       image: 'couchdb:2.2'
       networks:
         - medic-net
       ports:
-        - "127.0.0.1:5984:5984"
-        - "127.0.0.1:4370:4369"
-        - "127.0.0.1:9101:9100"
+        - "5984:5984"
+        - "4370:4369"
+        - "9101:9100"
       env_file:
         - ./.couch
       volumes:
