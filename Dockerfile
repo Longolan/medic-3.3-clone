@@ -1,7 +1,7 @@
 FROM node:10.15.0
 
-ENV NODE_ENV=production
-ENV ENV=production
+ENV NODE_ENV=development
+ENV ENV=development
 
 RUN npm i -g npm@latest
 
