@@ -81,5 +81,7 @@
       "maxSize": "70 kB"
     }
   ],
-  "dependencies": {}
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
 }
