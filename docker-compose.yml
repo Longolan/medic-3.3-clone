@@ -1,11 +1,29 @@
 version: '3.3'
 
 services:
+
+  nginx:
+    container_name: web_server
+    hostname: webserver
+    image: nginx:alpine
+    ports:
+      - "7707:80"
+    environment:
+      - NGINX_PORT=80
+    networks:
+      - medic-net
+    depends_on:
+      - couchdb
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/medic.lg-apps.com:/etc/nginx/sites-enabled/default.lg-apps.com
+
   webapp:
     build: .
     container_name: medic
+    hostname: medic
     ports:
-      - "5988:5988"
+      - "127.0.0.1:5988:5988"
     networks:
       - medic-net
     volumes:
@@ -14,19 +32,21 @@ services:
       - ./sentinel/logs:/srv/sentinel/logs/
     depends_on:
       - couchdb
+      - nginx
     env_file:
       - ./.env
       - ./.couch
 
   couchdb:
       container_name: couchdb
+      hostname: couch
       image: 'couchdb:2.2'
       networks:
         - medic-net
       ports:
-        - "5984:5984"
-        - "4370:4369"
-        - "9101:9100"
+        - "127.0.0.1:5984:5984"
+        - "127.0.0.1:4370:4369"
+        - "127.0.0.1:9101:9100"
       env_file:
         - ./.couch
       volumes:
