@@ -16,22 +16,11 @@ curl -X PUT http://$COUCH_USER:$COUCH_PASSWORD@127.0.0.1:$COUCH_PORT/_global_cha
 
 curl -X POST http://$COUCH_USER:$COUCH_PASSWORD@127.0.0.1:$COUCH_PORT/_users \
   -H "Content-Type: application/json" \
-  -d '{ "_id": "org.couchdb.user:admin", "name": "'$COUCH_USER'", "'$COUCH_PASSWORD'":"admin1234", "type":"user", "roles":[] }'
+  -d '{ "_id": "org.couchdb.user:admin", "name": "'$COUCH_USER'", "password":"'$COUCH_PASSWORD'", "type":"user", "roles":[] }'
 
 curl -X PUT http://$COUCH_USER:$COUCH_PASSWORD@127.0.0.1:$COUCH_PORT/_node/$COUCH_NODE_NAME/_config/httpd/secure_rewrites \
   -d '"false"' -H "Content-Type: application/json"
 
 # sleep 10
 
-echo 'Installing dependencies...'
-
-cd webapp && npm install && cd ..
-cd admin && npm install && cd ..
-cd api && npm install && cd ..
-cd sentinel && npm install && cd ..
-
-echo 'Building webapp...'
-
-grunt build
-
-docker-compose up -d webapp
+docker-compose up --build -d webapp
