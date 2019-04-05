@@ -148,6 +148,33 @@ To run without watch:
 yarn start
 ```
 
+### Docker setup
+
+- create .env
+- create .couch
+
+`$ docker-compose up -d couch`
+
+- use the commands on couch-installation.sh to secure couchdb. Do not run the script as is
+- ensure to change the passwords and username
+
+`$ docker-compose up -d medic`
+
+Contents of the .couch are:
+```shell
+COUCHDB_USER=admin
+COUCHDB_PASSWORD=admin1234
+NODENAME=couchdb-image
+```
+
+contents of .env:
+```shell
+COUCH_URL=http://admin:admin1234@localhost:5984/medic
+COUCH_NODE_NAME=couchdb@couchdb-image
+COUCH_USER=admin
+COUCH_PASSWORD=admin1234
+```
+
 ### Deploy apps individually
 
 If `yarn start` is not to your taste for whatever reason, the apps can be deployed individually.
