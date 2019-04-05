@@ -150,30 +150,19 @@ yarn start
 
 ### Docker setup
 
-- create .env
-- create .couch
+To run medic webapp on a docker setup use the following scripts
 
-`$ docker-compose up -d couch`
+`$ source ./setup-docker/export-env.sh [medic db name e.g. medic] [nodename e.g. couchdb-nodename] [root couchdb username] [root couchdb password]`
 
-- use the commands on couch-installation.sh to secure couchdb. Do not run the script as is
-- ensure to change the passwords and username
+The above script allows you to create and export the required environment variables. Here is an real use scenario:
 
-`$ docker-compose up -d medic`
+`$ source ./setup-docker/export-env.sh medic couchdb-image admin admin-1234 5984`
 
-Contents of the .couch are:
-```shell
-COUCHDB_USER=admin
-COUCHDB_PASSWORD=admin1234
-NODENAME=couchdb-image
-```
+Then run the script below to start docker-compose services
 
-contents of .env:
-```shell
-COUCH_URL=http://admin:admin1234@localhost:5984/medic
-COUCH_NODE_NAME=couchdb@couchdb-image
-COUCH_USER=admin
-COUCH_PASSWORD=admin1234
-```
+`$ source ./setup-docker/boot-system.sh`
+
+The medic webapp will throw and error `_design/medic - NotFound` do not be alarmed just do `docker-compose restart webapp`.
 
 ### Deploy apps individually
 
