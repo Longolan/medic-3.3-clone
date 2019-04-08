@@ -8,16 +8,24 @@ RUN npm i -g npm@latest
 RUN npm i -g grunt-cli kanso concurrently node-gyp
 
 COPY . /srv/
+WORKDIR /srv/
+RUN yarn install
 
+WORKDIR /srv/webapp/
+RUN yarn install
 WORKDIR /srv/
 
-RUN cd webapp && yarn install && cd ..
-RUN cd admin && yarn install && cd ..
-RUN cd api && yarn install && cd ..
-RUN cd sentinel && yarn install && cd ..
-
+WORKDIR /srv/admin/
+RUN yarn install
 WORKDIR /srv/
 
-RUN grunt build
+WORKDIR /srv/api/
+RUN yarn install
+WORKDIR /srv/
+
+RUN cd sentinel && yarn install
+WORKDIR /srv/
+
+RUN ./node_modules/.bin/grunt build-dev
 
 CMD ["npm", "run" , "dev"]

@@ -23,4 +23,5 @@ curl -X PUT http://$COUCH_USER:$COUCH_PASSWORD@127.0.0.1:$COUCH_PORT/_node/$COUC
 
 # sleep 10
 
-docker-compose up --build -d webapp
+docker-compose build --no-cache --force-rm webapp
+docker-compose up -d webapp
