@@ -25,10 +25,6 @@ services:
       - "5988:5988"
     networks:
       - medic-net
-    volumes:
-      - .:/srv/
-      - ./api/logs/:/srv/api/logs/
-      - ./sentinel/logs:/srv/sentinel/logs/
     depends_on:
       - couchdb
     env_file:
